@@ -2,12 +2,12 @@ import java.util.*;
 
 enum Coin {
 
-    FIFTY(50),
-    TWENTY(20),
-    TEN(10),
-    FIVE(5),
+    ONE(1),
     TWO(2),
-    ONE(1);
+    FIVE(5),
+    TEN(10),
+    TWENTY(20),
+    FIFTY(50);
 
     private final int amount;
 
@@ -17,6 +17,12 @@ enum Coin {
 
     public int amount() {
         return amount;
+    }
+    
+    public static Coin[] valuesAmountDesc() {
+        return Arrays.stream(values())
+                .sorted(Comparator.comparing(Coin::amount).reversed())
+                .toArray(Coin[]::new);
     }
 }
 
@@ -32,7 +38,7 @@ public class ChangeMaking {
 
         List<Integer> change = new ArrayList<>();
 
-        for (Coin coin : Coin.values()) {
+        for (Coin coin : Coin.valuesAmountDesc()) {
             while (amount - coin.amount() >= 0) {
                 amount -= coin.amount();
                 change.add(coin.amount());
