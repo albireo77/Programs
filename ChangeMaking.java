@@ -21,7 +21,7 @@ enum Coin {
     
     public static Coin[] valuesAmountDesc() {
         return Arrays.stream(values())
-                .sorted(Comparator.comparing(Coin::amount).reversed())
+                .sorted(Comparator.comparingInt(Coin::amount).reversed())
                 .toArray(Coin[]::new);
     }
 }
