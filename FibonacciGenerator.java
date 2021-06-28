@@ -27,9 +27,7 @@ public class FibonacciGenerator {
     }
 
     public List<BigInteger> getNumbers(int n) {
-        if (!memo.containsKey(n)) {
-            getNumber(n);
-        }
+        getNumber(n);
         return memo.values().stream()
                 .limit(n + 1)
                 .collect(Collectors.toList());
