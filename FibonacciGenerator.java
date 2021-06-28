@@ -23,7 +23,7 @@ public class FibonacciGenerator {
      * In Java 9+ Map implementations, map should not be modified during computation
      */
     public BigInteger getNumber8(int n) {
-        return memo.computeIfAbsent(n, (k) -> getNumber8(k - 2).add(getNumber8(k - 1)));
+        return memo.computeIfAbsent(n, k -> getNumber8(k - 2).add(getNumber8(k - 1)));
     }
 
     public List<BigInteger> getNumbers(int n) {
