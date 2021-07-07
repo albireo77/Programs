@@ -21,7 +21,7 @@ public class LoadBalancer {
     private final Mode mode;
     private final AtomicInteger rrCount = new AtomicInteger();
 
-    private final IntBinaryOperator OP = (actual, size) -> actual == size ? 0 : (actual + 1);
+    private final IntBinaryOperator ROUND_OP = (actual, max) -> actual == max ? 0 : (actual + 1);
 
     public LoadBalancer(List<Host> hosts, Mode mode) {
         this.hosts = hosts;
@@ -43,7 +43,7 @@ public class LoadBalancer {
         if (hosts.isEmpty()) {
             return;
         }
-        int i = rrCount.getAndAccumulate(hosts.size()-1, OP);
+        int i = rrCount.getAndAccumulate(hosts.size()-1, ROUND_OP);
         hosts.get(i).handleRequest(request);
     }
 
